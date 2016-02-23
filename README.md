@@ -3,7 +3,7 @@
 
 ## Overview
 
-This README reviews the basic ideas of algorithm analysis.  After this lesson, you should be able to read an algorithm written in Java and classify it as constant time, linear time, or quadratic time.
+This README reviews the basic ideas of algorithm analysis.  After this lesson, you should be able to compare algorithms written in Java and predict which will be more efficient for large problems.
 
 
 ## Objectives
@@ -17,30 +17,35 @@ This README reviews the basic ideas of algorithm analysis.  After this lesson, y
 
 ## Algorithm analysis
 
-In the previous README, I posed the question, "Why does Java provide two implementations of the List interface?"  The short answer is that for some methods `LinkedList` is faster, and for other methods `ArrayList` is faster.  Which one is better depends on how you use it.
+If you have worked with the Java Collections Framework (JCF), you might have wondered why Java provides two implementations of the List interface.  The short answer is that for some methods `LinkedList` is faster, and for other methods `ArrayList` is faster.  Which one is better depends on how you use it.
 
-To decide which one is better for a particular application, one approach is to try them both and measure the runtimes.  But before you get to that point, you can often make a good guess using [analysis of algorithms](http://en.wikipedia.org/wiki/Analysis_of_algorithms).
+To decide which one is better for a particular application, one approach is to try them both and see how long they take.  This approach, which is called "profiling" has a few problems:
 
- 
-When it works, algorithm analysis can predict performance and guide design decisions.  But there are a few problems we have to get past first:
+1.  Before you compare the algorithms, you have to implement them both.
 
-1.  In practice, the relative performance of two algorithms might depend on characteristics of the hardware, so one algorithm might be faster on Machine A, another on Machine B.  The usual solution to this problem is to specify a machine model and analyze the number of steps, or operations, an algorithm requires under a given model.
+2.  The results might depend on what kind of computer you use.  One algorithm might be better on one machine; the other might be better on a different machine.
 
-2.  Relative performance might depend on the details of the dataset. For example, some sorting algorithms run faster if the data are already partially sorted; other algorithms run slower in this case.  A common way to avoid this problem is to analyze the worst case scenario.
+3.  The results might depend on the size of the problem or the data provided as input.
 
-3.  Relative performance also depends on the size of the problem.  A sorting algorithm that is fast for small lists might be slow for long lists.  The usual solution to this problem is to express run time (or number of operations) as a function of problem size, and group functions into categories depending on how quickly they grow as problem size increases.
+We can address some of these problems using [analysis of algorithms](http://en.wikipedia.org/wiki/Analysis_of_algorithms).  When it works, we can use algorithm analysis to compare algorithms without having to implement them.  But we have to make some assumptions:
 
-The good thing about this kind of comparison is that it lends itself to simple classification of algorithms.  For example, if I know that the run time of Algorithm A tends to be proportional to the size of the input, n, and Algorithm B tends to be proportional to n<sup>2</sup>, then I expect A to be faster than B, at least for large values of n.  This kind of analysis comes with some caveats, but we’ll get to that later.
+1.  To avoid dealing with the details of computer hardware, we usually identify the basic operations that make up an algorithm, like addition, multiplication, and comparison of numbers, and count the number of operations each algorithm requires.
+
+2.  To avoid dealing with the details of the input data, we try to analyze the average performance for the inputs we expect.  If that's not possible, a common alternative is to analyze the worst case scenario, invoking the principle that we should hope for the best, but prepare for the worst.
+
+3.  Finally, we have to deal with the possibility that one algorithm works best for small problems and another for big ones.  In that case, we usually focus on the big ones, because for big problems a good algorithm is often much faster than a bad one.
+  
+This kind of analysis lends itself to simple classification of algorithms.  For example, if I know that the run time of Algorithm A tends to be proportional to the size of the input, `n`, and Algorithm B tends to be proportional to `n`<sup>2</sup>, then I expect A to be faster than B, at least for large values of `n`.
 
 Most simple algorithms fall into just a few categories.
 
-*   Constant time:  An algorithm is "constant time" if the run time does not depend on the size of the input.  For example, if you have an array of n elements and you use the bracket operator (`[]`) to access one of the elements, this operation takes pretty much the same amount of time regardless of how big the array is.
+*   Constant time:  An algorithm is "constant time" if the run time does not depend on the size of the input.  For example, if you have an array of `n` elements and you use the bracket operator (`[]`) to access one of the elements, this operation takes pretty much the same amount of time regardless of how big the array is.
 
-*   Linear:  An algorithm is "linear" if the run time is proportional to the size of the input.  For example, if you add up the elements of an array, you have to access n elements and perform n-1 additions.  The total number of operations (element accesses and additions) is 2n-1, which is proportional to n.
+*   Linear:  An algorithm is "linear" if the run time is proportional to the size of the input.  For example, if you add up the elements of an array, you have to access `n` elements and perform `n-1` additions.  The total number of operations (element accesses and additions) is `2n-1`, which is proportional to `n`.
 
-*   Quadratic:  An algorithm is "quadratic" if the run time is proportional to n<sup>2</sup>.
+*   Quadratic:  An algorithm is "quadratic" if the run time is proportional to `n`<sup>2</sup>.
 
-For example, here's an implementation of a simple sort algorithm called [selection sort](https://en.wikipedia.org/wiki/Selection_sort):
+For example, here's an implementation of a simple algorithm called [selection sort](https://en.wikipedia.org/wiki/Selection_sort):
 
 ```java
 public class SelectionSort {
@@ -85,46 +90,48 @@ The first method, `swapElements`, swaps two elements of the array.  Reading and 
 
 The second method, `indexLowest` finds the index of the smallest element of the array starting at a given index, `start`.  Each time through the loop, it accesses two elements of the array and performs one comparison.  Since these are all constant time operations, it doesn't really matter which ones we count.  To keep it simple, let's count the number of comparisons.
 
-1.  If start is 0, `indexLowest` traverses the entire array, and the total number of comparisons is n.
+1.  If start is 0, `indexLowest` traverses the entire array, and the total number of comparisons is `n`.
 
-2.  If start is 1, the number of comparisons is n-1.
+2.  If start is 1, the number of comparisons is `n-1`.
 
 3.  In general, the number of comparisons is `n-start`.
 
 So we normally consider `indexLowest` to be linear time, except for special values of `start`.
 
-The third method, `selectionSort`, sorts the array.  It loops from 0 to n-1, so the loop executes n times.  Each time, it performs a constant time operation, `swapElements`, and then calls `indexLowest`.
+The third method, `selectionSort`, sorts the array.  It loops from `0` to `n-1`, so the loop executes `n` times.  Each time, it performs a constant time operation, `swapElements`, and then calls `indexLowest`.
 
-The first time `selectionSort` calls `indexLowest`, it performs n comparisons.  The second time it performs n-1 comparisons, and so on.  The total number of comparisons is
+The first time `selectionSort` calls `indexLowest`, it performs `n` comparisons.  The second time it performs `n-1` comparisons, and so on.  The total number of comparisons is
 
-n + n-1 + n-2 + ... + 1 + 0
+    n + n-1 + n-2 + ... + 1 + 0
 
-The sum of this series is n(n+1)/2, which is proportional to n<sup>2</sup>; and that means that `selectionSort` is quadratic.
+The sum of this series is `n(n+1)/2`, which is proportional to `n`<sup>2</sup>; and that means that `selectionSort` is quadratic.
 
 
 ## Big O notation
 
-All constant time algorithms belong to a set called O(1).  So another way to say that an algorithm is contant-time is to say that it is in O(1).  Similarly, all linear algorithms belong to O(n), and all quadratic algorithms belong to O(n).  This way of classifying algorithms is called "big O notation".
+All constant time algorithms belong to a set called O(1).  So another way to say that an algorithm is constant time is to say that it is in O(1).  Similarly, all linear algorithms belong to O(n), and all quadratic algorithms belong to O(n).  This way of classifying algorithms is called "big O notation".
 
 NOTE: I am providing a casual definition of big O notation.  For a more mathematical treatment, see [Big O notation](https://en.wikipedia.org/wiki/Big_O_notation).
 
-This notation provides a convenient way to write some general rules about how algorithms behave when we compose them.  For example, if you perform a linear time algorithm followed by a constant algorithm, the total run time is linear.  Using ∈ to mean "is a member of":
+This notation provides a convenient way to write general rules about how algorithms behave when we compose them.  For example, if you perform a linear time algorithm followed by a constant algorithm, the total run time is linear.  Using ∈ to mean "is a member of":
 
-If f ∈ O(n) and g ∈ O(1), f+g ∈ O(n).
+<tt>If f ∈ O(n) and g ∈ O(1), f+g ∈ O(n)</tt>.
 
 If you perform two linear operations, the total is still linear:
 
-If f ∈ O(n), 2f ∈ O(n).
+<tt>If f ∈ O(n) and g ∈ O(n), f+g ∈ O(n)</tt>.
 
-In fact, if you perform a linear operation any number of times, k, the total is linear, as long as k is a constant that does not depend on n.
+In fact, if you perform a linear operation any number of times, `k`, the total is linear, as long as `k` is a constant that does not depend on `n`.
 
-If f ∈ O(n) and k is a constant, kf ∈ O(n).
+<tt>If f ∈ O(n) and k is a constant, kf ∈ O(n)</tt>.
 
-But if you perform a linear operation n times, the result is quadratic:
+But if you perform a linear operation `n` times, the result is quadratic:
 
-If f ∈ O(n), nf ∈ O(n<sup>2</sup>).
+<tt>If f ∈ O(n), nf ∈ O(n<sup>2</sup>)</tt>.
 
-One other piece of vocabulary you should know: an "order of growth" is a set of algorithms whose runtimes grows in the same way as problem size increases; for example, all linear algorithms belong to the same order of growth because their runtimes increase linearly with problem size.
+One other piece of vocabulary you should know: an "order of growth" is a set of algorithms whose runtimes grow in the same way as problem size increases; for example, all linear algorithms belong to the same order of growth because their runtimes increase linearly with problem size.
+
+NOTE: In this context, an "order" is a group, like the *Order of the Knights of the Round Table*, which is a group of knights, not a way of lining them up.  So you can imagine the *Order of Linear Algorithms* as a set of brave, chivalrous, and particularly efficient knights. 
 
 
 
