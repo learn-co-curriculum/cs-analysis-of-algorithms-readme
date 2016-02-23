@@ -29,13 +29,13 @@ To decide which one is better for a particular application, one approach is to t
 
 We can address some of these problems using [analysis of algorithms](http://en.wikipedia.org/wiki/Analysis_of_algorithms).  When it works, we can use algorithm analysis to compare algorithms without having to implement them.  But we have to make some assumptions:
 
-1.  To avoid dealing with the details of computer hardware, we usually identify the basic operations that make up an algorithm, like addition, multiplication, and comparison of numbers, and count the number of operations each algorithm requires.
+1.  To avoid dealing with the details of computer hardware, we usually identify the basic operations that make up an algorithm — like addition, multiplication, and comparison of numbers — and count the number of operations each algorithm requires.
 
 2.  To avoid dealing with the details of the input data, we try to analyze the average performance for the inputs we expect.  If that's not possible, a common alternative is to analyze the worst case scenario, invoking the principle that we should hope for the best, but prepare for the worst.
 
 3.  Finally, we have to deal with the possibility that one algorithm works best for small problems and another for big ones.  In that case, we usually focus on the big ones, because for big problems a good algorithm is often much faster than a bad one.
   
-This kind of analysis lends itself to simple classification of algorithms.  For example, if I know that the run time of Algorithm A tends to be proportional to the size of the input, `n`, and Algorithm B tends to be proportional to `n`<sup>2</sup>, then I expect A to be faster than B, at least for large values of `n`.
+This kind of analysis lends itself to simple classification of algorithms.  For example, if we know that the run time of Algorithm A tends to be proportional to the size of the input, `n`, and Algorithm B tends to be proportional to `n`<sup>2</sup>, we expect A to be faster than B, at least for large values of `n`.
 
 Most simple algorithms fall into just a few categories.
 
