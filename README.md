@@ -43,7 +43,7 @@ Most simple algorithms fall into just a few categories.
 
 *   Linear:  An algorithm is "linear" if the run time is proportional to the size of the input.  For example, if you add up the elements of an array, you have to access `n` elements and perform `n-1` additions.  The total number of operations (element accesses and additions) is `2n-1`, which is proportional to `n`.
 
-*   Quadratic:  An algorithm is "quadratic" if the run time is proportional to `n`<sup>2</sup>.
+*   Quadratic:  An algorithm is "quadratic" if the run time is proportional to `n`<sup>2</sup>.  For example, if the input has 2 elements, it might require 4 operations; with 3 elements, it might require 9, and so on.
 
 For example, here's an implementation of a simple algorithm called [selection sort](https://en.wikipedia.org/wiki/Selection_sort):
 
@@ -86,13 +86,13 @@ public class SelectionSort {
 
 ```
 
-The first method, `swapElements`, swaps two elements of the array.  Reading and writing elements are constant time operations, so the method is constant time.
+The first method, `swapElements`, swaps two elements of the array.  Reading and writing elements are constant time operations, regardless of the size of the array.  That works because if we know where the beginning of the array is, we can compute the location of element `i` or `j` with one multiplication and one addition.  And those are constant time operations.  Since everything in `swapElements` is constant time, the whole method is constant time.
 
 The second method, `indexLowest` finds the index of the smallest element of the array starting at a given index, `start`.  Each time through the loop, it accesses two elements of the array and performs one comparison.  Since these are all constant time operations, it doesn't really matter which ones we count.  To keep it simple, let's count the number of comparisons.
 
-1.  If start is 0, `indexLowest` traverses the entire array, and the total number of comparisons is `n`.
+1.  If `start` is 0, `indexLowest` traverses the entire array, and the total number of comparisons is `n`.
 
-2.  If start is 1, the number of comparisons is `n-1`.
+2.  If `start` is 1, the number of comparisons is `n-1`.
 
 3.  In general, the number of comparisons is `n-start`.
 
@@ -106,10 +106,12 @@ The first time `selectionSort` calls `indexLowest`, it performs `n` comparisons.
 
 The sum of this series is `n(n+1)/2`, which is proportional to `n`<sup>2</sup>; and that means that `selectionSort` is quadratic.
 
+To get to the same result a different way, we can think of `indexLowest` as a nested loop.  Each time we call `indexLowest`, the number of operations is proportional to `n`.  We call it `n` times, so the total number of operations is proportional to `n`<sup>2</sup>.
+
 
 ## Big O notation
 
-All constant time algorithms belong to a set called O(1).  So another way to say that an algorithm is constant time is to say that it is in O(1).  Similarly, all linear algorithms belong to O(n), and all quadratic algorithms belong to O(n).  This way of classifying algorithms is called "big O notation".
+All constant time algorithms belong to a set called O(1).  So another way to say that an algorithm is constant time is to say that it is in O(1).  Similarly, all linear algorithms belong to O(n), and all quadratic algorithms belong to O(n<sup>2</sup>).  This way of classifying algorithms is called "big O notation".
 
 NOTE: I am providing a casual definition of big O notation.  For a more mathematical treatment, see [Big O notation](https://en.wikipedia.org/wiki/Big_O_notation).
 
@@ -128,6 +130,8 @@ In fact, if you perform a linear operation any number of times, `k`, the total i
 But if you perform a linear operation `n` times, the result is quadratic:
 
 <tt>If f ∈ O(n), nf ∈ O(n<sup>2</sup>)</tt>.
+
+In general, we only care about the largest exponent of `n`.  So if the total number of operations is `2*n + 1`, it belongs to O(`n`).  The leading constant, 2, and the additive term, 1, are not important for this kind of analysis.  Similarly, <tt>n<sup>2</sup> + 100n + 100<tt> is in O(n<sup>2</sup>).
 
 One other piece of vocabulary you should know: an "order of growth" is a set of algorithms whose runtimes grow in the same way as problem size increases; for example, all linear algorithms belong to the same order of growth because their runtimes increase linearly with problem size.
 
