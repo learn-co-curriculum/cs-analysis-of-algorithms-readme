@@ -131,7 +131,7 @@ But if you perform a linear operation `n` times, the result is quadratic:
 
 <tt>If f ∈ O(n), nf ∈ O(n<sup>2</sup>)</tt>.
 
-In general, we only care about the largest exponent of `n`.  So if the total number of operations is `2*n + 1`, it belongs to O(`n`).  The leading constant, 2, and the additive term, 1, are not important for this kind of analysis.  Similarly, <tt>n<sup>2</sup> + 100n + 100<tt> is in O(n<sup>2</sup>).
+In general, we only care about the largest exponent of `n`.  So if the total number of operations is `2*n + 1`, it belongs to O(`n`).  The leading constant, 2, and the additive term, 1, are not important for this kind of analysis.  Similarly, <tt>n<sup>2</sup> + 100n + 100</tt> is in O(n<sup>2</sup>).
 
 One other piece of vocabulary you should know: an "order of growth" is a set of algorithms whose runtimes grow in the same way as problem size increases; for example, all linear algorithms belong to the same order of growth because their runtimes increase linearly with problem size.
 
