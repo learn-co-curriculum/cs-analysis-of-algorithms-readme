@@ -1,6 +1,11 @@
 # cs-analysis-of-algorithms-readme
 
+## What You Should Know Before Reading This
 
+  * [Java List Interface](http://www.codejava.net/java-core/collections/java-list-collection-tutorial-and-examples)
+  * [Selection Sort](http://www.go4expert.com/articles/selection-sort-algorithm-absolute-t27888/)
+  * [Java ArrayList Usage](http://www.tutorialspoint.com/java/java_arraylist_class.htm)
+  
 ## Overview
 
 This README reviews the basic ideas of algorithm analysis.  After this lesson, you should be able to compare algorithms written in Java and predict which will be more efficient for large problems.
