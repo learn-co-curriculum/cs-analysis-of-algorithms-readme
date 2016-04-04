@@ -40,15 +40,15 @@ We can address some of these problems using [analysis of algorithms](http://en.w
 
 3.  Finally, we have to deal with the possibility that one algorithm works best for small problems and another for big ones.  In that case, we usually focus on the big ones, because for big problems a good algorithm is often much faster than a bad one.
   
-This kind of analysis lends itself to simple classification of algorithms.  For example, if we know that the run time of Algorithm A tends to be proportional to the size of the input, `n`, and Algorithm B tends to be proportional to `n`<sup>2</sup>, we expect A to be faster than B, at least for large values of `n`.
+This kind of analysis lends itself to simple classification of algorithms.  For example, if we know that the run time of Algorithm A tends to be directly proportional to the size of the input, `n`, and Algorithm B tends to be directly proportional to `n`<sup>2</sup>, we expect A to be faster than B, at least for large values of `n`.
 
 Most simple algorithms fall into just a few categories.
 
 *   Constant time:  An algorithm is "constant time" if the run time does not depend on the size of the input.  For example, if you have an array of `n` elements and you use the bracket operator (`[]`) to access one of the elements, this operation takes pretty much the same amount of time regardless of how big the array is.
 
-*   Linear:  An algorithm is "linear" if the run time is proportional to the size of the input.  For example, if you add up the elements of an array, you have to access `n` elements and perform `n-1` additions.  The total number of operations (element accesses and additions) is `2n-1`, which is proportional to `n`.
+*   Linear:  An algorithm is "linear" if the run time is directly proportional to the size of the input.  For example, if you add up the elements of an array, you have to access `n` elements and perform `n-1` additions.  The total number of operations (element accesses and additions) is `2n-1`, which is directly proportional to `n`.
 
-*   Quadratic:  An algorithm is "quadratic" if the run time is proportional to `n`<sup>2</sup>.  For example, if the input has 2 elements, it might require 4 operations; with 3 elements, it might require 9, and so on.
+*   Quadratic:  An algorithm is "quadratic" if the run time is exponentially proportional to `n`<sup>2</sup>.  For example, if the input has 2 elements, it might require 4 operations; with 3 elements, it might require 9, and so on.
 
 For example, here's an implementation of a simple algorithm called [selection sort](https://en.wikipedia.org/wiki/Selection_sort):
 
@@ -109,9 +109,9 @@ The first time `selectionSort` calls `indexLowest`, it performs `n` comparisons.
 
     n + n-1 + n-2 + ... + 1 + 0
 
-The sum of this series is `n(n+1)/2`, which is proportional to `n`<sup>2</sup>; and that means that `selectionSort` is quadratic.
+The sum of this series is `n(n+1)/2`, which is exponentially proportional to `n`<sup>2</sup>; and that means that `selectionSort` is quadratic.
 
-To get to the same result a different way, we can think of `indexLowest` as a nested loop.  Each time we call `indexLowest`, the number of operations is proportional to `n`.  We call it `n` times, so the total number of operations is proportional to `n`<sup>2</sup>.
+To get to the same result a different way, we can think of `indexLowest` as a nested loop.  Each time we call `indexLowest`, the number of operations is directly proportional to `n`.  We call it `n` times, so the total number of operations is exponentially proportional to `n`<sup>2</sup>.
 
 
 ## Big O notation
