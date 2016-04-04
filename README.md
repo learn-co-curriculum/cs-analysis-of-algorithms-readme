@@ -48,7 +48,7 @@ Most simple algorithms fall into just a few categories.
 
 *   Linear:  An algorithm is "linear" if the run time is directly proportional to the size of the input.  For example, if you add up the elements of an array, you have to access `n` elements and perform `n-1` additions.  The total number of operations (element accesses and additions) is `2n-1`, which is directly proportional to `n`.
 
-*   Quadratic:  An algorithm is "quadratic" if the run time is exponentially proportional to `n`<sup>2</sup>.  For example, if the input has 2 elements, it might require 4 operations; with 3 elements, it might require 9, and so on.
+*   Quadratic:  An algorithm is "quadratic" if the run time is directly proportional to `n`<sup>2</sup>.  For example, if the input has 2 elements, it might require 4 operations; with 3 elements, it might require 9, and so on.
 
 For example, here's an implementation of a simple algorithm called [selection sort](https://en.wikipedia.org/wiki/Selection_sort):
 
@@ -109,9 +109,9 @@ The first time `selectionSort` calls `indexLowest`, it performs `n` comparisons.
 
     n + n-1 + n-2 + ... + 1 + 0
 
-The sum of this series is `n(n+1)/2`, which is exponentially proportional to `n`<sup>2</sup>; and that means that `selectionSort` is quadratic.
+The sum of this series is `n(n+1)/2`, which is directly proportional to `n`<sup>2</sup>; and that means that `selectionSort` is quadratic.
 
-To get to the same result a different way, we can think of `indexLowest` as a nested loop.  Each time we call `indexLowest`, the number of operations is directly proportional to `n`.  We call it `n` times, so the total number of operations is exponentially proportional to `n`<sup>2</sup>.
+To get to the same result a different way, we can think of `indexLowest` as a nested loop.  Each time we call `indexLowest`, the number of operations is directly proportional to `n`.  We call it `n` times, so the total number of operations is directly proportional to `n`<sup>2</sup>.
 
 
 ## Big O notation
