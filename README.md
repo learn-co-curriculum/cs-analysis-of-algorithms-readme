@@ -5,7 +5,7 @@
   * [Java List Interface](http://www.codejava.net/java-core/collections/java-list-collection-tutorial-and-examples)
   * [Selection Sort](http://www.go4expert.com/articles/selection-sort-algorithm-absolute-t27888/)
   * [Java ArrayList Usage](http://www.tutorialspoint.com/java/java_arraylist_class.htm)
-  
+
 ## Overview
 
 This README reviews the basic ideas of algorithm analysis.  After this lesson, you should be able to compare algorithms written in Java and predict which will be more efficient for large problems.
@@ -39,7 +39,7 @@ We can address some of these problems using [analysis of algorithms](http://en.w
 2.  To avoid dealing with the details of the input data, we try to analyze the average performance for the inputs we expect.  If that's not possible, a common alternative is to analyze the worst case scenario, invoking the principle that we should hope for the best, but prepare for the worst.
 
 3.  Finally, we have to deal with the possibility that one algorithm works best for small problems and another for big ones.  In that case, we usually focus on the big ones, because for big problems a good algorithm is often much faster than a bad one.
-  
+
 This kind of analysis lends itself to simple classification of algorithms.  For example, if we know that the run time of Algorithm A tends to be directly proportional to the size of the input, `n`, and Algorithm B tends to be directly proportional to `n`<sup>2</sup>, we expect A to be faster than B, at least for large values of `n`.
 
 Most simple algorithms fall into just a few categories.
@@ -66,7 +66,8 @@ public class SelectionSort {
 
 	/**
 	 * Finds the index of the lowest value
-	 * between indices low and high (inclusive).
+	 * starting from the index at `start` (inclusive)
+   * and going to the end of the array.
 	 */
 	public static int indexLowest(int[] array, int start) {
 		int lowIndex = start;
@@ -140,7 +141,7 @@ In general, we only care about the largest exponent of `n`.  So if the total num
 
 One other piece of vocabulary you should know: an "order of growth" is a set of algorithms whose runtimes grow in the same way as problem size increases; for example, all linear algorithms belong to the same order of growth because their runtimes increase linearly with problem size.
 
-NOTE: In this context, an "order" is a group, like the *Order of the Knights of the Round Table*, which is a group of knights, not a way of lining them up.  So you can imagine the *Order of Linear Algorithms* as a set of brave, chivalrous, and particularly efficient knights. 
+NOTE: In this context, an "order" is a group, like the *Order of the Knights of the Round Table*, which is a group of knights, not a way of lining them up.  So you can imagine the *Order of Linear Algorithms* as a set of brave, chivalrous, and particularly efficient knights.
 
 
 
@@ -151,4 +152,3 @@ NOTE: In this context, an "order" is a group, like the *Order of the Knights of 
 [Selection sort](https://en.wikipedia.org/wiki/Selection_sort)
 
 [Big O notation](https://en.wikipedia.org/wiki/Big_O_notation)
-
